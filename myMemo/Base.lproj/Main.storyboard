@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wsP-Sp-7pJ">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--나의 메모-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4zO-mM-DCK">
+                                <rect key="frame" x="40" y="203" width="313" height="466"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wZf-2U-E7k">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="306"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyZ-KO-ssG">
+                                        <rect key="frame" x="0.0" y="326" width="313" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="zVS-sg-IHA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="할 일 확인하기"/>
+                                        <connections>
+                                            <action selector="checkButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rcz-1g-lrM"/>
+                                            <segue destination="jrk-JM-cfO" kind="show" id="kap-PY-aI8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PvK-Za-jDF">
+                                        <rect key="frame" x="0.0" y="406" width="313" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="j9O-7h-1yQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="완료한 일 보기"/>
+                                        <connections>
+                                            <action selector="completeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cqc-Vt-KAu"/>
+                                            <segue destination="byw-ao-IyX" kind="show" id="p92-22-zEd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstItem="4zO-mM-DCK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="628-yk-dCd"/>
+                            <constraint firstItem="4zO-mM-DCK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="OIN-Cc-mJh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4zO-mM-DCK" secondAttribute="trailing" constant="40" id="k0U-0B-eo3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4zO-mM-DCK" secondAttribute="bottom" constant="100" id="qOg-5w-P8S"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="나의 메모" id="Fxc-UG-uUG"/>
+                    <connections>
+                        <outlet property="checkButton" destination="PyZ-KO-ssG" id="Xna-hM-RNk"/>
+                        <outlet property="completeButton" destination="PvK-Za-jDF" id="Rih-gB-0qM"/>
+                        <outlet property="firstViewImage" destination="wZf-2U-E7k" id="lga-eR-frV"/>
+                        <outlet property="mainImageView" destination="wZf-2U-E7k" id="wHX-T1-jOq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1935.1145038167938" y="-322.53521126760563"/>
+        </scene>
+        <!--나의 할 일-->
+        <scene sceneID="kLo-Vb-KTc">
+            <objects>
+                <viewController id="jrk-JM-cfO" customClass="SecondViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="czQ-9f-Yr3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="eg6-tj-XO0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="나의 할 일" image="book" catalog="system" id="ukd-FY-pbA"/>
+                    <navigationItem key="navigationItem" id="YKP-aL-zKL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="96C-gN-2VV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="82" y="456"/>
+        </scene>
+        <!--홈 화면-->
+        <scene sceneID="Scq-rN-tJa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AAk-1j-r8U" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="홈 화면" image="paperplane.fill" catalog="system" id="oEY-jB-yqO"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RCv-qc-enM">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </navigationBarAppearance>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="g1s-F5-IXF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vvW-5w-Rfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1008.3969465648854" y="-322.53521126760563"/>
+        </scene>
+        <!--완료한 일-->
+        <scene sceneID="7J1-U3-LW1">
+            <objects>
+                <viewController id="byw-ao-IyX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wmz-TQ-CVy">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Vrj-E4-arF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="완료한 일" image="book.fill" catalog="system" id="Eo8-23-8JM"/>
+                    <navigationItem key="navigationItem" id="Zof-ga-PZE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hOU-eB-LgT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1008" y="456"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="wfP-fd-q7x">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wsP-Sp-7pJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9vS-n9-oxY">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="AAk-1j-r8U" kind="relationship" relationship="viewControllers" id="Dk8-JJ-BJD"/>
+                        <segue destination="jrk-JM-cfO" kind="relationship" relationship="viewControllers" id="1sO-f3-G15"/>
+                        <segue destination="byw-ao-IyX" kind="relationship" relationship="viewControllers" id="rs6-kX-iMB"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tMa-Mx-28P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="81.679389312977094" y="-322.53521126760563"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="p92-22-zEd"/>
+        <segue reference="kap-PY-aI8"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="book" catalog="system" width="128" height="99"/>
+        <image name="book.fill" catalog="system" width="128" height="95"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="119"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
