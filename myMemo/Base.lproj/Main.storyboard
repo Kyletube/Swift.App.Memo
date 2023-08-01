@@ -27,9 +27,11 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="zVS-sg-IHA"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="할 일 확인하기"/>
+                                        <state key="normal" title="할 일 확인하기">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="checkButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rcz-1g-lrM"/>
                                             <segue destination="jrk-JM-cfO" kind="show" id="kap-PY-aI8"/>
@@ -40,9 +42,11 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="j9O-7h-1yQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="완료한 일 보기"/>
+                                        <state key="normal" title="완료한 일 보기">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="completeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cqc-Vt-KAu"/>
                                             <segue destination="byw-ao-IyX" kind="show" id="p92-22-zEd"/>
@@ -83,7 +87,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="나의 할 일" image="book" catalog="system" id="ukd-FY-pbA"/>
-                    <navigationItem key="navigationItem" id="YKP-aL-zKL"/>
+                    <navigationItem key="navigationItem" id="YKP-aL-zKL">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="cUo-KD-SUj">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="jrk-JM-cfO" id="zRr-dq-Ikb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="cUo-KD-SUj" id="maJ-MK-z5t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96C-gN-2VV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,7 +127,7 @@
         <!--완료한 일-->
         <scene sceneID="7J1-U3-LW1">
             <objects>
-                <viewController id="byw-ao-IyX" sceneMemberID="viewController">
+                <viewController id="byw-ao-IyX" customClass="ThirdViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wmz-TQ-CVy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
