@@ -62,6 +62,16 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         table.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+            return true // 셀을 스와이프 가능하게 함
+        }
+
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                showDeleteAlert(at: indexPath)
+            }
+        }
+    
     func showDeleteAlert(at indexPath: IndexPath) {
             let alertController = UIAlertController(title: "메모 삭제", message: "선택한 메모를 삭제하시겠습니까?", preferredStyle: .alert)
             
