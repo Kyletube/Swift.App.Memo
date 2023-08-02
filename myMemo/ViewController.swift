@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  myMemo
-//
-//  Created by Kyle on 2023/07/31.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
