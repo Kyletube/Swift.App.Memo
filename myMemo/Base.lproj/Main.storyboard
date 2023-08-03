@@ -95,6 +95,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="wMn-9h-6mi" kind="show" identifier="showDetail" id="y3m-ai-Hpb"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -123,22 +126,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96C-gN-2VV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1527" y="380"/>
+            <point key="canvasLocation" x="1502" y="380"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="itc-Cs-eV7">
             <objects>
-                <viewController id="wMn-9h-6mi" sceneMemberID="viewController">
+                <viewController id="wMn-9h-6mi" customClass="DetailViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qUN-pE-zly">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="텍스트뷰" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-Xp-x4F">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="xvw-AU-d1z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="f1j-Xp-x4F" firstAttribute="leading" secondItem="xvw-AU-d1z" secondAttribute="leading" id="2FV-Gl-vGB"/>
+                            <constraint firstItem="f1j-Xp-x4F" firstAttribute="top" secondItem="xvw-AU-d1z" secondAttribute="top" id="U6u-T4-Cjl"/>
+                            <constraint firstItem="xvw-AU-d1z" firstAttribute="bottom" secondItem="f1j-Xp-x4F" secondAttribute="bottom" id="cyU-FM-p76"/>
+                            <constraint firstItem="xvw-AU-d1z" firstAttribute="trailing" secondItem="f1j-Xp-x4F" secondAttribute="trailing" id="xqV-xp-51D"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mXX-eD-Goo">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="4HU-nM-KoR">
+                            <connections>
+                                <action selector="detailDeleteMemo:" destination="wMn-9h-6mi" id="75V-Xn-5hh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="detailDeleteButton" destination="4HU-nM-KoR" id="0Xt-LS-DQb"/>
+                        <outlet property="memoTextView" destination="f1j-Xp-x4F" id="29M-Tr-ntu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Efh-hH-Zfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1526" y="1059"/>
+            <point key="canvasLocation" x="1502" y="1132"/>
         </scene>
         <!--홈 화면-->
         <scene sceneID="Scq-rN-tJa">
@@ -184,6 +213,9 @@
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="book.fill" catalog="system" width="128" height="95"/>
         <image name="paperplane.fill" catalog="system" width="128" height="119"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

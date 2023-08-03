@@ -10,6 +10,12 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         setUp()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            loadMemos()
+            table.reloadData()
+        }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memoList.count
@@ -19,11 +25,6 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
         cell.textLabel?.text = memoList[indexPath.row]
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        showDeleteAlert(at: indexPath)
     }
 
     func setUp() {
@@ -86,4 +87,18 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             
             present(alertController, animated: true, completion: nil)
         }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetail", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail",
+           let detailVC = segue.destination as? DetailViewController,
+           let selectedIndexPath = sender as? IndexPath {
+                   let selectedRow = selectedIndexPath.row
+                   detailVC.memo = memoList[selectedRow]
+               }
+           }
 }
