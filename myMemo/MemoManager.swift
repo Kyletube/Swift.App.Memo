@@ -33,4 +33,10 @@ class MemoManager {
             memoList = memos
         }
     }
+    
+    func updateMemo(at index: Int, with memo: String) {
+            guard index >= 0, index < memoList.count else { return }
+            memoList[index] = memo
+            saveMemos()
+        }
 }

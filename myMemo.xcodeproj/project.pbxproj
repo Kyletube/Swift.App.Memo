@@ -66,11 +66,11 @@
 			children = (
 				27EB04E02A77C7DD000419B1 /* AppDelegate.swift */,
 				27EB04E22A77C7DD000419B1 /* SceneDelegate.swift */,
+				27F5D4152A7BA78B00D9905F /* MemoManager.swift */,
 				27EB04E42A77C7DD000419B1 /* ViewController.swift */,
 				27E84C9F2A78E8200087B9B4 /* SecondViewController.swift */,
-				27E84CA12A790B830087B9B4 /* ThirdViewController.swift */,
 				27616B152A7B8C1600DBE48F /* DetailViewController.swift */,
-				27F5D4152A7BA78B00D9905F /* MemoManager.swift */,
+				27E84CA12A790B830087B9B4 /* ThirdViewController.swift */,
 				27EB04E62A77C7DD000419B1 /* Main.storyboard */,
 				27EB04E92A77C7DF000419B1 /* Assets.xcassets */,
 				27EB04EB2A77C7DF000419B1 /* LaunchScreen.storyboard */,

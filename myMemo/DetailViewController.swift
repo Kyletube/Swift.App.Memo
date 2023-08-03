@@ -15,6 +15,8 @@ class DetailViewController: UIViewController {
 
     func setupUI() {
         memoTextView.text = memo
+        memoTextView.isEditable = true
+        
     }
     
     
@@ -31,4 +33,14 @@ class DetailViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+
+            if let editedMemo = memoTextView.text {
+                if let index = memoManager.getMemos().firstIndex(of: memo!) {
+                    memoManager.updateMemo(at: index, with: editedMemo)
+                }
+            }
+        }
 }
