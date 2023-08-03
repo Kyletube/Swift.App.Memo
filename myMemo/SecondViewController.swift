@@ -4,7 +4,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var table: UITableView!
-    var memoList = [String]()
+    var memoManager = MemoManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,17 +13,16 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            loadMemos()
             table.reloadData()
         }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memoList.count
+        return memoManager.getMemos().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
-        cell.textLabel?.text = memoList[indexPath.row]
+        cell.textLabel?.text = memoManager.getMemos()[indexPath.row]
         return cell
     }
 
@@ -35,31 +34,16 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         table.dataSource = self
         table.register(UITableViewCell.self, forCellReuseIdentifier: "MemoCell")
         
-        loadMemos()
     }
 
     @IBAction func addButtonTapped(_ sender: Any) {
         let newMemo = "새로운 메모"
-        memoList.append(newMemo)
-        saveMemos()
+        memoManager.addMemo(newMemo)
         table.reloadData()
-    }
-
-    
-    func saveMemos() {
-        UserDefaults.standard.set(memoList, forKey: "Memos")
-    }
-
-    
-    func loadMemos() {
-        if let memos = UserDefaults.standard.array(forKey: "Memos") as? [String] {
-            memoList = memos
-        }
     }
     
     func deleteMemo(at indexPath: IndexPath) {
-        memoList.remove(at: indexPath.row)
-        saveMemos()
+        memoManager.deleteMemo(at: indexPath.row)
         table.reloadData()
     }
     
@@ -97,8 +81,8 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         if segue.identifier == "showDetail",
            let detailVC = segue.destination as? DetailViewController,
            let selectedIndexPath = sender as? IndexPath {
-                   let selectedRow = selectedIndexPath.row
-                   detailVC.memo = memoList[selectedRow]
+            let selectedRow = selectedIndexPath.row
+            detailVC.memo = memoManager.getMemos()[selectedRow]
                }
            }
 }
