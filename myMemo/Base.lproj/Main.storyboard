@@ -49,7 +49,7 @@
                                         </state>
                                         <connections>
                                             <action selector="completeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cqc-Vt-KAu"/>
-                                            <segue destination="byw-ao-IyX" kind="show" id="p92-22-zEd"/>
+                                            <segue destination="8UW-xU-wFS" kind="show" id="o5R-ej-Iqt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -134,6 +134,47 @@
             </objects>
             <point key="canvasLocation" x="1502" y="380"/>
         </scene>
+        <!--Third View Controller-->
+        <scene sceneID="UC5-CK-1xM">
+            <objects>
+                <viewController id="8UW-xU-wFS" customClass="ThirdViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hFd-Cq-cC4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NfM-mM-EEh">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompleteMemoCell" id="ZCY-rg-9SZ">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZCY-rg-9SZ" id="jYg-bE-VOY">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="O0E-Wg-r1g"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NfM-mM-EEh" firstAttribute="leading" secondItem="O0E-Wg-r1g" secondAttribute="leading" id="1EB-CJ-u5e"/>
+                            <constraint firstItem="O0E-Wg-r1g" firstAttribute="bottom" secondItem="NfM-mM-EEh" secondAttribute="bottom" id="Gs7-Vi-163"/>
+                            <constraint firstItem="O0E-Wg-r1g" firstAttribute="trailing" secondItem="NfM-mM-EEh" secondAttribute="trailing" id="Jaf-D2-GHv"/>
+                            <constraint firstItem="NfM-mM-EEh" firstAttribute="top" secondItem="O0E-Wg-r1g" secondAttribute="top" id="Y6s-fD-FYe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="The-cO-1fW"/>
+                    <connections>
+                        <outlet property="tableView" destination="NfM-mM-EEh" id="vpa-0Y-Hx6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wcj-Kx-F0h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2382" y="380"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="itc-Cs-eV7">
             <objects>
@@ -190,27 +231,9 @@
             </objects>
             <point key="canvasLocation" x="1008.3969465648854" y="-322.53521126760563"/>
         </scene>
-        <!--완료한 일-->
-        <scene sceneID="7J1-U3-LW1">
-            <objects>
-                <viewController id="byw-ao-IyX" customClass="ThirdViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Wmz-TQ-CVy">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Vrj-E4-arF"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="완료한 일" image="book.fill" catalog="system" id="Eo8-23-8JM"/>
-                    <navigationItem key="navigationItem" id="Zof-ga-PZE"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hOU-eB-LgT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2389" y="380"/>
-        </scene>
     </scenes>
     <resources>
         <image name="book" catalog="system" width="128" height="99"/>
-        <image name="book.fill" catalog="system" width="128" height="95"/>
         <image name="paperplane.fill" catalog="system" width="128" height="119"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
