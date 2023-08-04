@@ -33,6 +33,16 @@ class MemoManager {
         saveMemos()
         saveSwitchStates()
     }
+    
+    private func saveMemos() {
+        UserDefaults.standard.set(memoList, forKey: "Memos")
+    }
+
+    private func loadMemos() {
+        if let memos = UserDefaults.standard.array(forKey: "Memos") as? [String] {
+            memoList = memos
+        }
+    }
 
     func updateMemo(at index: Int, with memo: String) {
         guard index >= 0, index < memoList.count else { return }
@@ -45,17 +55,7 @@ class MemoManager {
         switchStates[index] = isOn
         saveSwitchStates()
     }
-
-    private func saveMemos() {
-        UserDefaults.standard.set(memoList, forKey: "Memos")
-    }
-
-    private func loadMemos() {
-        if let memos = UserDefaults.standard.array(forKey: "Memos") as? [String] {
-            memoList = memos
-        }
-    }
-
+    
     private func saveSwitchStates() {
         UserDefaults.standard.set(switchStates, forKey: "SwitchStates")
     }
@@ -68,4 +68,17 @@ class MemoManager {
             saveSwitchStates()
         }
     }
+    
+    func getCompletedMemos() -> [String] {
+            var completedMemos = [String]()
+            let switchStates = getSwitchStates()
+
+            for (index, isOn) in switchStates.enumerated() {
+                if isOn {
+                    completedMemos.append(memoList[index])
+                }
+            }
+
+            return completedMemos
+        }
 }
