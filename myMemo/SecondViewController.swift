@@ -3,11 +3,22 @@ import UIKit
 class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var table: UITableView!
+    
     var memoManager = MemoManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        loadSwitchStates()
+    }
+    
+    func setUp() {
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addButtonTapped(_:)))
+        navigationItem.rightBarButtonItem = addButton
+        
+        table.delegate = self
+        table.dataSource = self
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "MemoCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -20,19 +31,54 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
-        cell.textLabel?.text = memoManager.getMemos()[indexPath.row]
-        return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
+            let text = memoManager.getMemos()[indexPath.row]
+
+            let switchView = UISwitch(frame: .zero)
+            switchView.tag = indexPath.row
+            switchView.isOn = memoManager.getSwitchStates()[indexPath.row] // 스위치 상태 설정
+            switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+            cell.accessoryView = switchView
+
+            // 스위치 상태에 따라 셀 텍스트 스타일 설정
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
+            if switchView.isOn {
+                attributeString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            }
+            cell.textLabel?.attributedText = attributeString
+
+            return cell
+        }
+
+    @objc func switchChanged(_ sender: UISwitch) {
+            let index = sender.tag
+            let isOn = sender.isOn
+            memoManager.updateSwitchState(at: index, isOn: isOn) // 스위치 상태를 업데이트하고 저장
+            table.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        }
+    
+    private func loadSwitchStates() {
+            let switchStates = memoManager.getSwitchStates()
+            for (index, isOn) in switchStates.enumerated() {
+                if isOn {
+                    let indexPath = IndexPath(row: index, section: 0)
+                    table.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true // 셀을 스와이프 가능하게 함
     }
     
-    func setUp() {
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addButtonTapped(_:)))
-        navigationItem.rightBarButtonItem = addButton
-        
-        table.delegate = self
-        table.dataSource = self
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "MemoCell")
-        
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            showDeleteAlert(at: indexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetail", sender: indexPath)
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
@@ -57,18 +103,6 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             present(alertController, animated: true, completion: nil)
     }
     
-    
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true // 셀을 스와이프 가능하게 함
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            showDeleteAlert(at: indexPath)
-        }
-    }
-    
     func showDeleteAlert(at indexPath: IndexPath) {
         let alertController = UIAlertController(title: "메모 삭제", message: "선택한 메모를 삭제하시겠습니까?", preferredStyle: .alert)
         
@@ -87,10 +121,6 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     func deleteMemo(at indexPath: IndexPath) {
         memoManager.deleteMemo(at: indexPath.row)
         table.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showDetail", sender: indexPath)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -6,7 +6,6 @@ class DetailViewController: UIViewController {
     var memoManager = MemoManager.shared
 
     @IBOutlet weak var memoTextView: UITextView!
-    @IBOutlet weak var detailDeleteButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
