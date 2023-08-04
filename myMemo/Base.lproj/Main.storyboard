@@ -153,18 +153,8 @@
                             <constraint firstItem="xvw-AU-d1z" firstAttribute="trailing" secondItem="f1j-Xp-x4F" secondAttribute="trailing" id="xqV-xp-51D"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mXX-eD-Goo">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="trash" id="4HU-nM-KoR">
-                                <connections>
-                                    <action selector="detailDeleteMemo:" destination="wMn-9h-6mi" id="75V-Xn-5hh"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Item" id="auk-U2-Z7z"/>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="mXX-eD-Goo"/>
                     <connections>
-                        <outlet property="detailDeleteButton" destination="4HU-nM-KoR" id="0Xt-LS-DQb"/>
                         <outlet property="memoTextView" destination="f1j-Xp-x4F" id="29M-Tr-ntu"/>
                     </connections>
                 </viewController>
