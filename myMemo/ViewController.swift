@@ -1,7 +1,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var firstViewImage: UIImageView!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var completeButton: UIButton!
@@ -11,7 +11,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         makeUI()
     }
-
+    
     func makeUI() {
         checkButton.clipsToBounds = true
         checkButton.layer.cornerRadius = 5

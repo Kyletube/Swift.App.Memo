@@ -31,42 +31,25 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
-            let text = memoManager.getMemos()[indexPath.row]
-
-            let switchView = UISwitch(frame: .zero)
-            switchView.tag = indexPath.row
-            switchView.isOn = memoManager.getSwitchStates()[indexPath.row] // 스위치 상태 설정
-            switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
-            cell.accessoryView = switchView
-
-            // 스위치 상태에 따라 셀 텍스트 스타일 설정
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
-            if switchView.isOn {
-                attributeString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-            }
-            cell.textLabel?.attributedText = attributeString
-
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
+        let text = memoManager.getMemos()[indexPath.row]
+        
+        let switchView = UISwitch(frame: .zero)
+        switchView.tag = indexPath.row
+        switchView.isOn = memoManager.getSwitchStates()[indexPath.row] // 스위치 상태 설정
+        switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+        cell.accessoryView = switchView
+        
+        // 스위치 상태에 따라 셀 텍스트 스타일 설정
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
+        if switchView.isOn {
+            attributeString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         }
-
-    @objc func switchChanged(_ sender: UISwitch) {
-            let index = sender.tag
-            let isOn = sender.isOn
-            memoManager.updateSwitchState(at: index, isOn: isOn) // 스위치 상태를 업데이트하고 저장
-            table.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-        }
+        cell.textLabel?.attributedText = attributeString
+        
+        return cell
+    }
     
-    private func loadSwitchStates() {
-            let switchStates = memoManager.getSwitchStates()
-            for (index, isOn) in switchStates.enumerated() {
-                if isOn {
-                    let indexPath = IndexPath(row: index, section: 0)
-                    table.reloadRows(at: [indexPath], with: .automatic)
-                }
-            }
-        }
-
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true // 셀을 스와이프 가능하게 함
     }
@@ -81,26 +64,43 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         performSegue(withIdentifier: "showDetail", sender: indexPath)
     }
     
+    @objc func switchChanged(_ sender: UISwitch) {
+        let index = sender.tag
+        let isOn = sender.isOn
+        memoManager.updateSwitchState(at: index, isOn: isOn) // 스위치 상태를 업데이트하고 저장
+        table.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
+    private func loadSwitchStates() {
+        let switchStates = memoManager.getSwitchStates()
+        for (index, isOn) in switchStates.enumerated() {
+            if isOn {
+                let indexPath = IndexPath(row: index, section: 0)
+                table.reloadRows(at: [indexPath], with: .automatic)
+            }
+        }
+    }
+    
     @IBAction func addButtonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "새로운 메모", message: "메모 내용을 입력하세요.", preferredStyle: .alert)
-
-            alertController.addTextField { (textField) in
-                textField.placeholder = "할 일을 입력하세요."
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "할 일을 입력하세요."
+        }
+        
+        let addAction = UIAlertAction(title: "등록", style: .default) { (_) in
+            if let newMemo = alertController.textFields?.first?.text {
+                self.memoManager.addMemo(newMemo)
+                self.table.reloadData()
             }
-
-            let addAction = UIAlertAction(title: "등록", style: .default) { (_) in
-                if let newMemo = alertController.textFields?.first?.text {
-                    self.memoManager.addMemo(newMemo)
-                    self.table.reloadData()
-                }
-            }
-
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-
-            alertController.addAction(addAction)
-            alertController.addAction(cancelAction)
-
-            present(alertController, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alertController.addAction(addAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func showDeleteAlert(at indexPath: IndexPath) {

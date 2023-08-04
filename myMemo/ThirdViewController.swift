@@ -23,11 +23,11 @@ extension ThirdViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompleteMemoCell", for: indexPath)
-                
-                let completedMemos = memoManager.getCompletedMemos()
-                cell.textLabel?.text = completedMemos[indexPath.row]
-                
-                return cell
+        
+        let completedMemos = memoManager.getCompletedMemos()
+        cell.textLabel?.text = completedMemos[indexPath.row]
+        
+        return cell
     }
     
     
