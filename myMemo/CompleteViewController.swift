@@ -14,7 +14,11 @@ class CompleteViewController: UIViewController {
     }
 }
 
-extension CompleteViewController: UITableViewDataSource, UITableViewDelegate {
+extension CompleteViewController: UITableViewDelegate {
+    
+}
+
+extension CompleteViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memoManager.getCompletedMemos().count

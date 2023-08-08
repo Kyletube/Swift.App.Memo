@@ -79,7 +79,7 @@
         <!--나의 할 일-->
         <scene sceneID="kLo-Vb-KTc">
             <objects>
-                <viewController id="jrk-JM-cfO" customClass="SecondViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jrk-JM-cfO" customClass="MemoListViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="czQ-9f-Yr3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
