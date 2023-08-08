@@ -20,7 +20,6 @@ class MemoListViewController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.register(UITableViewCell.self, forCellReuseIdentifier: "MemoCell")
-        loadSwitchStates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,16 +32,6 @@ class MemoListViewController: UIViewController {
         let isOn = sender.isOn
         memoManager.updateSwitchState(at: index, isOn: isOn) // 스위치 상태를 업데이트하고 저장
         table.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-    }
-    
-    private func loadSwitchStates() {
-        let switchStates = memoManager.getSwitchStates()
-        for (index, isOn) in switchStates.enumerated() {
-            if isOn {
-                let indexPath = IndexPath(row: index, section: 0)
-                table.reloadRows(at: [indexPath], with: .automatic)
-            }
-        }
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
@@ -112,3 +101,15 @@ extension MemoListViewController: UITableViewDataSource {
         return cell
     }
 }
+
+
+//    private func loadSwitchStates() {
+//        let switchStates = memoManager.getSwitchStates()
+//        for (index, isOn) in switchStates.enumerated() {
+//            if isOn {
+//                let indexPath = IndexPath(row: index, section: 0)
+//                table.reloadRows(at: [indexPath], with: .automatic)
+//            }
+//        }
+//    }
+//        loadSwitchStates()
