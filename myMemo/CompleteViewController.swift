@@ -1,6 +1,6 @@
 import UIKit
 
-class ThirdViewController: UIViewController {
+class CompleteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -14,8 +14,7 @@ class ThirdViewController: UIViewController {
     }
 }
 
-extension ThirdViewController: UITableViewDataSource, UITableViewDelegate {
-    
+extension CompleteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memoManager.getCompletedMemos().count
@@ -28,9 +27,5 @@ extension ThirdViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = completedMemos[indexPath.row]
         
         return cell
-    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }

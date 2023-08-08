@@ -134,10 +134,10 @@
             </objects>
             <point key="canvasLocation" x="1502" y="380"/>
         </scene>
-        <!--Third View Controller-->
+        <!--Complete View Controller-->
         <scene sceneID="UC5-CK-1xM">
             <objects>
-                <viewController id="8UW-xU-wFS" customClass="ThirdViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8UW-xU-wFS" customClass="CompleteViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hFd-Cq-cC4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

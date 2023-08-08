@@ -2,10 +2,10 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var memoTextView: UITextView!
+    
     var memoIndex: Int?
     var memoManager = MemoManager.shared
-    
-    @IBOutlet weak var memoTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

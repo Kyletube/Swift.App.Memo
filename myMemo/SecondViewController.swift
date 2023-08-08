@@ -1,7 +1,9 @@
 import UIKit
 
 class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     @IBOutlet weak var addButton: UIBarButtonItem!
+    
     @IBOutlet weak var table: UITableView!
     
     var memoManager = MemoManager.shared
@@ -9,7 +11,6 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        loadSwitchStates()
     }
     
     func setUp() {
@@ -19,6 +20,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         table.delegate = self
         table.dataSource = self
         table.register(UITableViewCell.self, forCellReuseIdentifier: "MemoCell")
+        loadSwitchStates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
