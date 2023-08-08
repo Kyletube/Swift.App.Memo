@@ -16,39 +16,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4zO-mM-DCK">
-                                <rect key="frame" x="40" y="203" width="313" height="515"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4zO-mM-DCK">
+                                <rect key="frame" x="40" y="183.66666666666663" width="313" height="485"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wZf-2U-E7k">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="355"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wZf-2U-E7k">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="345"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="345" id="7xz-EG-xkp"/>
+                                        </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyZ-KO-ssG">
-                                        <rect key="frame" x="0.0" y="375" width="313" height="60"/>
+                                        <rect key="frame" x="0.0" y="365" width="313" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="zVS-sg-IHA"/>
+                                            <constraint firstAttribute="height" constant="50" id="yPJ-jd-K0Z"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="할 일 확인하기">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="checkButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rcz-1g-lrM"/>
-                                            <segue destination="jrk-JM-cfO" kind="show" id="kap-PY-aI8"/>
+                                            <segue destination="jrk-JM-cfO" kind="show" id="5De-b8-PRx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PvK-Za-jDF">
-                                        <rect key="frame" x="0.0" y="455" width="313" height="60"/>
+                                        <rect key="frame" x="0.0" y="435" width="313" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="j9O-7h-1yQ"/>
+                                            <constraint firstAttribute="height" constant="50" id="n80-2g-H4m"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="완료한 일 보기">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="completeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cqc-Vt-KAu"/>
                                             <segue destination="8UW-xU-wFS" kind="show" id="o5R-ej-Iqt"/>
                                         </connections>
                                     </button>
@@ -58,18 +61,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
-                            <constraint firstItem="4zO-mM-DCK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="628-yk-dCd"/>
-                            <constraint firstItem="4zO-mM-DCK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="OIN-Cc-mJh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4zO-mM-DCK" secondAttribute="trailing" constant="40" id="k0U-0B-eo3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4zO-mM-DCK" secondAttribute="bottom" constant="100" id="qOg-5w-P8S"/>
+                            <constraint firstItem="4zO-mM-DCK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KQA-cL-1A8"/>
+                            <constraint firstItem="4zO-mM-DCK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Te6-rF-BAy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="나의 메모" id="Fxc-UG-uUG"/>
                     <connections>
-                        <outlet property="checkButton" destination="PyZ-KO-ssG" id="Xna-hM-RNk"/>
-                        <outlet property="completeButton" destination="PvK-Za-jDF" id="Rih-gB-0qM"/>
-                        <outlet property="firstViewImage" destination="wZf-2U-E7k" id="lga-eR-frV"/>
-                        <outlet property="mainImageView" destination="wZf-2U-E7k" id="wHX-T1-jOq"/>
+                        <outlet property="checkButton" destination="PyZ-KO-ssG" id="l8Q-OT-hPo"/>
+                        <outlet property="completeButton" destination="PvK-Za-jDF" id="F7S-R4-PyJ"/>
+                        <outlet property="mainImageView" destination="wZf-2U-E7k" id="7y1-Pn-Jf4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -243,6 +243,9 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
