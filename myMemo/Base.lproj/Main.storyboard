@@ -11,7 +11,7 @@
         <!--나의 메모-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="myMemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,7 +126,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="cUo-KD-SUj" id="maJ-MK-z5t"/>
+                        <outlet property="addButton" destination="cUo-KD-SUj" id="Abg-tc-Zk7"/>
                         <outlet property="table" destination="FL0-fp-isQ" id="Q72-1D-kor"/>
                     </connections>
                 </viewController>

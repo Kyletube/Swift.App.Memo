@@ -1,12 +1,11 @@
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
 
     @IBOutlet weak var mainImageView: UIImageView!
     
     @IBOutlet weak var checkButton: UIButton!
-    
     @IBOutlet weak var completeButton: UIButton!
     
     override func viewDidLoad() {

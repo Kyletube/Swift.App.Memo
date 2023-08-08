@@ -10,12 +10,7 @@ class CompleteViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
-        tableView.delegate = self
     }
-}
-
-extension CompleteViewController: UITableViewDelegate {
-    
 }
 
 extension CompleteViewController: UITableViewDataSource {

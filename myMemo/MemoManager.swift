@@ -15,10 +15,6 @@ class MemoManager {
         return memoList
     }
     
-    func getSwitchStates() -> [Bool] {
-        return switchStates
-    }
-    
     func getCompletedMemos() -> [String] {
         var completedMemos = [String]()
         let switchStates = getSwitchStates()
@@ -47,6 +43,12 @@ class MemoManager {
         saveSwitchStates()
     }
     
+    func updateMemo(at index: Int, with memo: String) {
+        guard index >= 0, index < memoList.count else { return }
+        memoList[index] = memo
+        saveMemos()
+    }
+    
     private func saveMemos() {
         UserDefaults.standard.set(memoList, forKey: "Memos")
     }
@@ -57,10 +59,8 @@ class MemoManager {
         }
     }
     
-    func updateMemo(at index: Int, with memo: String) {
-        guard index >= 0, index < memoList.count else { return }
-        memoList[index] = memo
-        saveMemos()
+    func getSwitchStates() -> [Bool] {
+        return switchStates
     }
     
     func updateSwitchState(at index: Int, isOn: Bool) {
