@@ -46,26 +46,11 @@ class MemoListViewController: UIViewController {
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "새로운 메모", message: "메모 내용을 입력하세요.", preferredStyle: .alert)
-        
-        alertController.addTextField { (textField) in
-            textField.placeholder = "할 일을 입력하세요."
-        }
-        
-        let addAction = UIAlertAction(title: "등록", style: .default) { (_) in
-            if let newMemo = alertController.textFields?.first?.text {
+        showAddMemoAlert { newMemo in
                 self.memoManager.addMemo(newMemo)
                 self.table.reloadData()
             }
         }
-        
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        alertController.addAction(addAction)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
     
     func deleteMemo(at indexPath: IndexPath) {
         memoManager.deleteMemo(at: indexPath.row)
