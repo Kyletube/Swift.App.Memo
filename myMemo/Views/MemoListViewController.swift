@@ -87,16 +87,29 @@ extension MemoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
-        let text = searchBar.text?.isEmpty ?? true ? memoManager.getMemos()[indexPath.row] : filteredMemos[indexPath.row]
+        
+        var text = ""
+        var isSwitchOn = false
+        
+        if searchBar.text?.isEmpty ?? true {
+            text = memoManager.getMemos()[indexPath.row]
+            isSwitchOn = memoManager.getSwitchStates()[indexPath.row]
+        } else {
+            text = filteredMemos[indexPath.row]
+            let memoIndex = memoManager.getMemos().firstIndex(of: filteredMemos[indexPath.row]) ?? -1
+            if memoIndex >= 0 {
+                isSwitchOn = memoManager.getSwitchStates()[memoIndex]
+            }
+        }
         
         let switchView = UISwitch(frame: .zero)
         switchView.tag = indexPath.row
-        switchView.isOn = memoManager.getSwitchStates()[indexPath.row] // 스위치 상태 설정
+        switchView.isOn = isSwitchOn
         switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         cell.accessoryView = switchView
         
         // 스위치 상태에 따라 셀 텍스트 스타일 설정
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
+        let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: text)
         if switchView.isOn {
             attributeString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         }
@@ -104,6 +117,7 @@ extension MemoListViewController: UITableViewDataSource {
         
         return cell
     }
+
 }
 
 extension MemoListViewController: UISearchBarDelegate {
