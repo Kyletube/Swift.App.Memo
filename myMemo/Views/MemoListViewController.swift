@@ -33,17 +33,30 @@ class MemoListViewController: UIViewController {
     
     @objc func switchChanged(_ sender: UISwitch) {
         let index = sender.tag
+        
+        var originalIndex = index // 동일한 인덱스로 초기화
+        if searchBar.text?.isEmpty == false {
+            let memo = filteredMemos[index]
+            if let memoIndex = memoManager.getMemos().firstIndex(of: memo) {
+                originalIndex = memoIndex
+            }
+        }
+        
         let isOn = sender.isOn
-        memoManager.updateSwitchState(at: index, isOn: isOn) // 스위치 상태를 업데이트하고 저장
-        table.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        memoManager.updateSwitchState(at: originalIndex, isOn: isOn)
+        
+        // 필터링되었더라도 원래 인덱스의 셀만 다시 로드
+        let indexPath = IndexPath(row: originalIndex, section: 0)
+        table.reloadRows(at: [indexPath], with: .automatic)
     }
+    
     
     @IBAction func addButtonTapped(_ sender: Any) {
         showAddMemoAlert { newMemo in
-                self.memoManager.addMemo(newMemo)
-                self.table.reloadData()
-            }
+            self.memoManager.addMemo(newMemo)
+            self.table.reloadData()
         }
+    }
     
     func deleteMemo(at indexPath: IndexPath) {
         memoManager.deleteMemo(at: indexPath.row)
@@ -95,19 +108,20 @@ extension MemoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
         
-        var text = ""
-        var isSwitchOn = false
-        
+        let memoIndex: Int
         if searchBar.text?.isEmpty ?? true {
-            text = memoManager.getMemos()[indexPath.row]
-            isSwitchOn = memoManager.getSwitchStates()[indexPath.row]
+            memoIndex = indexPath.row
         } else {
-            text = filteredMemos[indexPath.row]
-            let memoIndex = memoManager.getMemos().firstIndex(of: filteredMemos[indexPath.row]) ?? -1
-            if memoIndex >= 0 {
-                isSwitchOn = memoManager.getSwitchStates()[memoIndex]
+            let memo = filteredMemos[indexPath.row]
+            if let index = memoManager.getMemos().firstIndex(of: memo) {
+                memoIndex = index
+            } else {
+                return cell
             }
         }
+        
+        let text = memoManager.getMemos()[memoIndex]
+        let isSwitchOn = memoManager.getSwitchStates()[memoIndex]
         
         let switchView = UISwitch(frame: .zero)
         switchView.tag = indexPath.row
@@ -124,7 +138,7 @@ extension MemoListViewController: UITableViewDataSource {
         
         return cell
     }
-
+    
 }
 
 extension MemoListViewController: UISearchBarDelegate {
