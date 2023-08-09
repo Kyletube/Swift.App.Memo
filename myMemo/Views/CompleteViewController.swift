@@ -27,4 +27,17 @@ extension CompleteViewController: UITableViewDataSource {
         
         return cell
     }
-}
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+            return true // 셀을 스와이프 가능하게 함
+        }
+        
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                showDeleteAlert(at: indexPath) {
+                    self.memoManager.deleteMemo(at: indexPath.row)
+                    tableView.reloadData()
+                }
+            }
+        }
+    }

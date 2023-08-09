@@ -51,7 +51,7 @@ class MemoListViewController: UIViewController {
            let detailVC = segue.destination as? DetailViewController,
            let selectedIndexPath = sender as? IndexPath {
             let selectedRow = selectedIndexPath.row
-            detailVC.memoIndex = selectedRow // memo 대신 memoIndex에 인덱스 값을 넘겨줌
+            detailVC.memoIndex = selectedRow //memoIndex의 인덱스 값을 넘겨줌
         }
     }
 }
