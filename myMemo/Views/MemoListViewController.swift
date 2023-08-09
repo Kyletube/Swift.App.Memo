@@ -36,8 +36,7 @@ class MemoListViewController: UIViewController {
         
         var originalIndex = index // 동일한 인덱스로 초기화
         if searchBar.text?.isEmpty == false {
-            let memo = filteredMemos[index]
-            if let memoIndex = memoManager.getMemos().firstIndex(of: memo) {
+            if let memoIndex = memoManager.getMemos().firstIndex(of: filteredMemos[index]) {
                 originalIndex = memoIndex
             }
         }
