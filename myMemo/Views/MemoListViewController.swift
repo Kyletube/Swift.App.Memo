@@ -6,7 +6,11 @@ class MemoListViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var memoManager = MemoManager.shared
+    
+    var filteredMemos = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,12 +82,12 @@ extension MemoListViewController: UITableViewDelegate {
 extension MemoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memoManager.getMemos().count
+        return searchBar.text?.isEmpty ?? true ? memoManager.getMemos().count : filteredMemos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
-        let text = memoManager.getMemos()[indexPath.row]
+        let text = searchBar.text?.isEmpty ?? true ? memoManager.getMemos()[indexPath.row] : filteredMemos[indexPath.row]
         
         let switchView = UISwitch(frame: .zero)
         switchView.tag = indexPath.row
@@ -102,14 +106,13 @@ extension MemoListViewController: UITableViewDataSource {
     }
 }
 
+extension MemoListViewController: UISearchBarDelegate {
+    //서치바의 텍스트가 변경될때마다 호출됨
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredMemos = memoManager.getMemos().filter { memo in
+            return memo.localizedCaseInsensitiveContains(searchText)
+        } // 검색 바에 입력된 텍스트 (searchText)가 포함되어 있는지를 대소문자를 구분하지 않고 검사
+        table.reloadData()
+    }
+}
 
-//    private func loadSwitchStates() {
-//        let switchStates = memoManager.getSwitchStates()
-//        for (index, isOn) in switchStates.enumerated() {
-//            if isOn {
-//                let indexPath = IndexPath(row: index, section: 0)
-//                table.reloadRows(at: [indexPath], with: .automatic)
-//            }
-//        }
-//    }
-//        loadSwitchStates()
