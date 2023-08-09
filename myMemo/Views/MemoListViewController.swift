@@ -55,7 +55,14 @@ class MemoListViewController: UIViewController {
            let detailVC = segue.destination as? DetailViewController,
            let selectedIndexPath = sender as? IndexPath {
             let selectedRow = selectedIndexPath.row
-            detailVC.memoIndex = selectedRow //memoIndex의 인덱스 값을 넘겨줌
+            if searchBar.text?.isEmpty ?? true {
+                detailVC.memoIndex = selectedRow
+            } else {
+                let selectedMemo = filteredMemos[selectedRow]
+                if let memoIndex = memoManager.getMemos().firstIndex(of: selectedMemo) {
+                    detailVC.memoIndex = memoIndex
+                }
+            }
         }
     }
 }
