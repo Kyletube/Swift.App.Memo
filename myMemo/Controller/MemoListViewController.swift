@@ -10,7 +10,7 @@ class MemoListViewController: UIViewController {
     
     var memoManager = MemoManager.shared
     
-    var filteredMemos = [String]()
+    var filteredList: [(id: Int, memo: String)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,19 +34,9 @@ class MemoListViewController: UIViewController {
     @objc func switchChanged(_ sender: UISwitch) {
         let index = sender.tag
         
-        var originalIndex = index // 동일한 인덱스로 초기화
-        if searchBar.text?.isEmpty == false {
-            if let memoIndex = memoManager.getMemos().firstIndex(of: filteredMemos[index]) {
-                originalIndex = memoIndex
-            }
-        }
+        memoManager.updateSwitchState(at: sender.tag, isOn: sender.isOn)
         
-        let isOn = sender.isOn
-        memoManager.updateSwitchState(at: originalIndex, isOn: isOn)
-        
-        // 필터링되었더라도 원래 인덱스의 셀만 다시 로드
-        let indexPath = IndexPath(row: originalIndex, section: 0)
-        table.reloadRows(at: [indexPath], with: .automatic)
+        table.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
     }
     
     
@@ -62,21 +52,21 @@ class MemoListViewController: UIViewController {
         table.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail",
-           let detailVC = segue.destination as? DetailViewController,
-           let selectedIndexPath = sender as? IndexPath {
-            let selectedRow = selectedIndexPath.row
-            if searchBar.text?.isEmpty ?? true {
-                detailVC.memoIndex = selectedRow
-            } else {
-                let selectedMemo = filteredMemos[selectedRow]
-                if let memoIndex = memoManager.getMemos().firstIndex(of: selectedMemo) {
-                    detailVC.memoIndex = memoIndex
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "showDetail",
+               let detailVC = segue.destination as? DetailViewController,
+               let selectedIndexPath = sender as? IndexPath {
+                let selectedRow = selectedIndexPath.row
+                if searchBar.text?.isEmpty ?? true {
+                    detailVC.memoIndex = selectedRow
+                } else {
+                    let selectedMemo = filteredList[selectedRow]
+                    if let memoIndex = memoManager.getMemos().firstIndex(of: selectedMemo.memo) {
+                        detailVC.memoIndex = memoIndex
+                    }
                 }
             }
         }
-    }
 }
 
 extension MemoListViewController: UITableViewDelegate {
@@ -101,7 +91,7 @@ extension MemoListViewController: UITableViewDelegate {
 extension MemoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchBar.text?.isEmpty ?? true ? memoManager.getMemos().count : filteredMemos.count
+        return searchBar.text?.isEmpty ?? true ? memoManager.getMemos().count : filteredList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,27 +101,25 @@ extension MemoListViewController: UITableViewDataSource {
         if searchBar.text?.isEmpty ?? true {
             memoIndex = indexPath.row
         } else {
-            let memo = filteredMemos[indexPath.row]
-            if let index = memoManager.getMemos().firstIndex(of: memo) {
-                memoIndex = index
-            } else {
-                return cell
-            }
+            let selectedMemoTuple = filteredList[indexPath.row]
+            memoIndex = selectedMemoTuple.id
         }
         
         let text = memoManager.getMemos()[memoIndex]
         let isSwitchOn = memoManager.getSwitchStates()[memoIndex]
         
         let switchView = UISwitch(frame: .zero)
-        switchView.tag = indexPath.row
+        switchView.tag = memoIndex // indexPath.row 대신 memoIndex를 사용
         switchView.isOn = isSwitchOn
         switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         cell.accessoryView = switchView
         
         // 스위치 상태에 따라 셀 텍스트 스타일 설정
         let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: text)
-        if switchView.isOn {
+        if isSwitchOn {
             attributeString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        } else {
+            attributeString.removeAttribute(.strikethroughStyle, range: NSMakeRange(0, attributeString.length))
         }
         cell.textLabel?.attributedText = attributeString
         
@@ -141,11 +129,12 @@ extension MemoListViewController: UITableViewDataSource {
 }
 
 extension MemoListViewController: UISearchBarDelegate {
-    //서치바의 텍스트가 변경될때마다 호출됨
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredMemos = memoManager.getMemos().filter { memo in
+        filteredList = memoManager.getMemos().enumerated().filter { index, memo in
             return memo.localizedCaseInsensitiveContains(searchText)
-        } // 검색 바에 입력된 텍스트 (searchText)가 포함되어 있는지를 대소문자를 구분하지 않고 검사
+        }.map { index, memo in
+            return (index, memo)
+        }
         table.reloadData()
     }
 }
