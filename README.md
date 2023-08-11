@@ -1,4 +1,4 @@
-# 나의 메모
+# 📋 나의 메모
 
 
 ## 프로젝트 개요
@@ -8,9 +8,21 @@
 #### 이 앱은 MemoManager클래스와 뷰 컨트롤러(MainViewController, MemoListViewController, DetailViewController, CompleteViewController)로 구성되어 있습니다.
 #### 각 뷰 컨트롤러는 사용자 인터페이스를 구성하고 필요한 기능을 구현합니다.
 
+
+<br><br>
+- - -
+## 🛠️ 사용한 기술 스택 (Tech Stack)
+<img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"><img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">
 - - -
 
-## 주요 기능
+<br><br>
+- - -
+## 🗓️ 개발 기간
+* 2023-07-31(월) ~ 2023-08-10(목), 9일간
+- - -
+<br><br>
+
+## 📌 주요 기능
 
 ### 1. MemoManager
 
@@ -53,10 +65,10 @@
 
 - - -
 
-## 미완성된 기능
+## 💥 미완성된 기능
 
 ### 검색중인 상태일때 메모리스트 편집
-#### 확인된 오류
+#### 🚨 확인된 오류
 
 - 검색중인 상태에서 메모를 삭제시 메모의 인덱스를 벗어나며 앱이 종료되는 문제
 - 검색중인 상태에서 메모의 완료여부 체크시 취소선이 그어지는 텍스트 스타일변경이 일어나지 않는 문제
