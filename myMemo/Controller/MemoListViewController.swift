@@ -33,10 +33,23 @@ class MemoListViewController: UIViewController {
     
     @objc func switchChanged(_ sender: UISwitch) {
         let index = sender.tag
+
+        memoManager.updateSwitchState(at: index, isOn: sender.isOn)
         
-        memoManager.updateSwitchState(at: sender.tag, isOn: sender.isOn)
-        
-        table.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        if let indexPath = findIndexPath(for: index) {
+            table.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
+
+    func findIndexPath(for index: Int) -> IndexPath? {
+        if searchBar.text?.isEmpty ?? true {
+            return IndexPath(row: index, section: 0)
+        } else {
+            if let memoTupleIndex = filteredList.firstIndex(where: { $0.id == index }) {
+                return IndexPath(row: memoTupleIndex, section: 0)
+            }
+        }
+        return nil
     }
     
     
