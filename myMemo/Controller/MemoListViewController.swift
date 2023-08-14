@@ -50,7 +50,7 @@ class MemoListViewController: UIViewController {
             }
         }
         return nil
-    }
+    } // 검색상태 스위치변경버그이슈 해결!!
     
     
     @IBAction func addButtonTapped(_ sender: Any) {
